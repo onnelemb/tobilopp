@@ -86,6 +86,34 @@
   </div>
 </section>
 
+<section>
+  <div class="slideshow" id="slideshow3">
+    <div class="slides-wrapper">
+      <img src="image3a.png" alt="slide1" onclick="window.open('https://www.instagram.com/markuskuljelaud/', '_blank')">
+      <img src="image3b.png" alt="slide2" onclick="window.open('https://www.instagram.com/markuskuljelaud/', '_blank')">
+    </div>
+    <div class="arrow left" onclick="prevSlide('slideshow3')">&#10094;</div>
+    <div class="arrow right" onclick="nextSlide('slideshow3')">&#10095;</div>
+  </div>
+  <div class="text-box">
+    <p>"new slideshow 1"<br>20.01.25 12:00</p>
+  </div>
+</section>
+
+<section>
+  <div class="text-box">
+    <p>"new slideshow 2"<br>20.01.25 18:00</p>
+  </div>
+  <div class="slideshow" id="slideshow4">
+    <div class="slides-wrapper">
+      <img src="image4a.png" alt="slide1" onclick="window.open('https://www.instagram.com/markuskuljelaud/', '_blank')">
+      <img src="image4b.png" alt="slide2" onclick="window.open('https://www.instagram.com/markuskuljelaud/', '_blank')">
+    </div>
+    <div class="arrow left" onclick="prevSlide('slideshow4')">&#10094;</div>
+    <div class="arrow right" onclick="nextSlide('slideshow4')">&#10095;</div>
+  </div>
+</section>
+
 <footer>
   <p><br><br><br><br><br><br><br><br><br><br><br><br><br><br>o. lemb<br><br><br>ma ei tegele omnivaga saad kaest katte<br><br><br>2025</p>
 </footer>
@@ -152,8 +180,10 @@ class Slideshow {
 }
 const slideshow1=new Slideshow('slideshow1',6000);
 const slideshow2=new Slideshow('slideshow2',6000);
-function nextSlide(id){ if(id==='slideshow1') slideshow1.next(); if(id==='slideshow2') slideshow2.next(); }
-function prevSlide(id){ if(id==='slideshow1') slideshow1.prev(); if(id==='slideshow2') slideshow2.prev(); }
+const slideshow3=new Slideshow('slideshow3',6000);
+const slideshow4=new Slideshow('slideshow4',6000);
+function nextSlide(id){ if(id==='slideshow1') slideshow1.next(); if(id==='slideshow2') slideshow2.next(); if(id==='slideshow3') slideshow3.next(); if(id==='slideshow4') slideshow4.next(); }
+function prevSlide(id){ if(id==='slideshow1') slideshow1.prev(); if(id==='slideshow2') slideshow2.prev(); if(id==='slideshow3') slideshow3.prev(); if(id==='slideshow4') slideshow4.prev(); }
 </script>
 
 </body>
