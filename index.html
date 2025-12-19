@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mis</title>
+<style>
+  * { box-sizing: border-box; margin:0; padding:0; }
+  body { font-family: helvetica, sans-serif; text-transform: lowercase; background: #f9f9f9; }
+
+  header, footer, section, .marquee { background: #fff; color: #000; }
+  header, footer { text-align: center; padding: 1em; }
+  
+  .marquee { padding: 0.5em; overflow: hidden; white-space: nowrap; }
+  .marquee span { display: inline-block; padding-left: 100%; animation: marquee 20s linear infinite; }
+  @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-100%); } }
+
+  section { display: flex; align-items: center; justify-content: center; padding: 50px 20px; gap: 20px; flex-wrap: wrap; }
+  .slideshow, .text-box { flex: 1 1 300px; position: relative; overflow: hidden; }
+  .slides-wrapper { display: flex; transition: transform 1s ease-in-out; }
+  .slides-wrapper img { width: 100%; flex-shrink: 0; }
+
+  .text-box { display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px; }
+
+  .arrow { position: absolute; top: 50%; transform: translateY(-50%); font-size: 2em; color: #000; background: rgba(255,255,255,0.7); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; user-select: none; z-index: 10; opacity: 0; transition: opacity 0.3s; }
+  .arrow.left { left: 10px; }
+  .arrow.right { right: 10px; }
+  .slideshow:hover .arrow { opacity: 1; }
+
+  @media (max-width: 768px) {
+    section { flex-direction: column; }
+    .slideshow, .text-box { flex: 1 1 100%; }
+    .arrow { font-size: 1.5em; width: 35px; height: 35px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>tobilopp.</h1>
+</header>
+
+<div class="marquee">
+  <span>sittuge k</span>
+</div>
+
+<section>
+  <div class="slideshow" id="slideshow1">
+    <div class="slides-wrapper">
+      <img src="image1a.jpg" alt="slide1">
+      <img src="image1b.jpg" alt="slide2">
+    </div>
+    <div class="arrow left" onclick="prevSlide('slideshow1')">&#10094;</div>
+    <div class="arrow right" onclick="nextSlide('slideshow1')">&#10095;</div>
+  </div>
+  <div class="text-box">
+    <p>"hanna"</br>19.12.25 00:59</p>
+  </div>
+</section>
+
+<section>
+  <div class="text-box">
+    <p>"fu*k maison margiela"</br>19.12.25 17:09</p>
+  </div>
+  <div class="slideshow" id="slideshow2">
+    <div class="slides-wrapper">
+      <img src="image2a.jpg" alt="slide1">
+      <img src="image2b.jpg" alt="slide2">
+    </div>
+    <div class="arrow left" onclick="prevSlide('slideshow2')">&#10094;</div>
+    <div class="arrow right" onclick="nextSlide('slideshow2')">&#10095;</div>
+  </div>
+</section>
+
+<footer>
+  <p>o. lemb</br></br>ma ei tegele omnivaga saad kaest katte</br></br>2025</p>
+</footer>
+
+<script>
+class Slideshow {
+  constructor(id, interval = 6000) {
+    this.slideshow = document.getElementById(id);
+    this.wrapper = this.slideshow.querySelector('.slides-wrapper');
+    this.slides = this.wrapper.querySelectorAll('img');
+    this.index = 0;
+    this.total = this.slides.length;
+    this.intervalTime = interval;
+
+    this.start();
+    this.slideshow.addEventListener('mouseenter', () => clearInterval(this.timer));
+    this.slideshow.addEventListener('mouseleave', () => this.start());
+  }
+
+  showSlide(i) {
+    this.wrapper.style.transform = `translateX(-${i * 100}%)`;
+    this.index = i;
+  }
+
+  next() {
+    this.showSlide((this.index + 1) % this.total);
+  }
+
+  prev() {
+    this.showSlide((this.index - 1 + this.total) % this.total);
+  }
+
+  start() {
+    this.timer = setInterval(() => this.next(), this.intervalTime);
+  }
+}
+
+const slideshow1 = new Slideshow('slideshow1', 6000);
+const slideshow2 = new Slideshow('slideshow2', 6000);
+
+function nextSlide(id) {
+  if(id === 'slideshow1') slideshow1.next();
+  if(id === 'slideshow2') slideshow2.next();
+}
+
+function prevSlide(id) {
+  if(id === 'slideshow1') slideshow1.prev();
+  if(id === 'slideshow2') slideshow2.prev();
+}
+</script>
+
+</body>
+</html>
