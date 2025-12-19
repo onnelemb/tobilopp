@@ -10,7 +10,7 @@
 
   header, footer, section, .marquee, #clock-container { background: #fff; color: #000; }
   header, footer { text-align: center; padding: 1em; }
-  header h1 { font-weight: normal; font-size: 1.2em; }
+  header h1 { display: none; }
 
   .marquee { padding: 0.5em; overflow: hidden; white-space: nowrap; }
   .marquee span { display: inline-block; padding-left: 100%; animation: marquee 20s linear infinite, flicker 1.5s infinite; }
@@ -23,7 +23,7 @@
   section { display: flex; align-items: center; justify-content: center; padding: 50px 20px; gap: 20px; flex-wrap: wrap; background: #fff; }
   .slideshow, .text-box { flex: 1 1 250px; position: relative; overflow: hidden; }
   .slides-wrapper { display: flex; transition: transform 1s ease-in-out; }
-  .slides-wrapper img { flex-shrink: 0; width: 90%; max-width: 250px; object-fit: cover; aspect-ratio: 3 / 4; margin: 0 auto; }
+  .slides-wrapper img { flex-shrink: 0; width: 90%; max-width: 250px; object-fit: cover; aspect-ratio: 3 / 4; margin: 0 auto; cursor: pointer; }
 
   .text-box { display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px; font-size: 1.2em; }
 
@@ -34,6 +34,8 @@
 
   #clock-container { width: 100%; display: flex; justify-content: center; padding: 30px 0; background: #fff; }
   #clock { width: 300px; height: 300px; image-rendering: crisp-edges; }
+
+  footer { padding-bottom: 200px; } /* extra space */
 
   @media (max-width: 768px) {
     section { flex-direction: column; }
@@ -47,22 +49,20 @@
 <body>
 
 <header>
-  <h1>tobilopp.</h1>
+  <div id="clock-container">
+    <canvas id="clock"></canvas>
+  </div>
 </header>
 
 <div class="marquee">
   <span>!!tobilopp on igavene ma tahan koigelt kaks kumpa!!</span>
 </div>
 
-<div id="clock-container">
-  <canvas id="clock"></canvas>
-</div>
-
 <section>
   <div class="slideshow" id="slideshow1">
     <div class="slides-wrapper">
-      <img src="image1a.png" alt="slide1">
-      <img src="image2a.png" alt="slide2">
+      <img src="image1a.png" alt="slide1" onclick="window.open('https://www.instagram.com/markuskuljelaud/', '_blank')">
+      <img src="image2a.png" alt="slide2" onclick="window.open('https://www.instagram.com/markuskuljelaud/', '_blank')">
     </div>
     <div class="arrow left" onclick="prevSlide('slideshow1')">&#10094;</div>
     <div class="arrow right" onclick="nextSlide('slideshow1')">&#10095;</div>
@@ -78,8 +78,8 @@
   </div>
   <div class="slideshow" id="slideshow2">
     <div class="slides-wrapper">
-      <img src="image1b.png" alt="slide1">
-      <img src="image2b.png" alt="slide2">
+      <img src="image1b.png" alt="slide1" onclick="window.open('https://www.instagram.com/markuskuljelaud/', '_blank')">
+      <img src="image2b.png" alt="slide2" onclick="window.open('https://www.instagram.com/markuskuljelaud/', '_blank')">
     </div>
     <div class="arrow left" onclick="prevSlide('slideshow2')">&#10094;</div>
     <div class="arrow right" onclick="nextSlide('slideshow2')">&#10095;</div>
@@ -87,7 +87,7 @@
 </section>
 
 <footer>
-  <p>o. lemb<br><br>ma ei tegele omnivaga saad kaest katte<br><br>2025</p>
+  <p><br><br><br><br><br><br><br><br><br><br><br><br><br><br>o. lemb<br><br><br>ma ei tegele omnivaga saad kaest katte<br><br><br>2025</p>
 </footer>
 
 <script>
@@ -120,7 +120,7 @@ function drawHand(pos,length,width,color='#000'){
 }
 setInterval(drawClock,1000);
 
-// Slideshows auto one-direction looping
+// Slideshows auto one-direction looping with touch/swipe
 class Slideshow {
   constructor(id, interval=6000) {
     this.slideshow = document.getElementById(id);
@@ -128,7 +128,6 @@ class Slideshow {
     this.slides = Array.from(this.wrapper.querySelectorAll('img'));
     this.index=0; this.total=this.slides.length; this.intervalTime=interval;
 
-    // ensure wrapper width and each slide width
     this.wrapper.style.display='flex';
     this.wrapper.style.width = `${this.total * 100}%`;
     this.slides.forEach(slide => slide.style.width = `${100 / this.total}%`);
@@ -136,6 +135,15 @@ class Slideshow {
     this.start();
     this.slideshow.addEventListener('mouseenter',()=>clearInterval(this.timer));
     this.slideshow.addEventListener('mouseleave',()=>this.start());
+
+    // touch/swipe support
+    let startX = 0;
+    this.slideshow.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
+    this.slideshow.addEventListener('touchend', e => {
+      let endX = e.changedTouches[0].clientX;
+      if(startX - endX > 50) this.next();
+      else if(endX - startX > 50) this.prev();
+    });
   }
   showSlide(i){ this.wrapper.style.transform=`translateX(-${i * (100 / this.total)}%)`; this.index=i; }
   next(){ this.showSlide((this.index+1)%this.total); }
