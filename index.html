@@ -6,9 +6,9 @@
 <title>mis</title>
 <style>
   * { box-sizing: border-box; margin:0; padding:0; }
-  body { font-family: helvetica, sans-serif; text-transform: lowercase; background: #f9f9f9; }
+  body { font-family: helvetica, sans-serif; text-transform: lowercase; background: #fff; }
 
-  header, footer, section, .marquee, #clock-container { background: #fff; color: #000; }
+  header, footer, section, .marquee, #clock-container, #notes { background: #fff; color: #000; }
   header, footer { text-align: center; padding: 1em; }
   header h1 { display: none; }
 
@@ -20,22 +20,24 @@
     20%, 22%, 24%, 55% { opacity:0; }
   }
 
-  section { display: flex; align-items: center; justify-content: center; padding: 50px 20px; gap: 20px; flex-wrap: wrap; background: #fff; }
+  section { display: flex; align-items: center; justify-content: center; padding: 50px 20px; gap: 20px; flex-wrap: wrap; }
   .slideshow, .text-box { flex: 1 1 250px; position: relative; overflow: hidden; }
   .slides-wrapper { display: flex; transition: transform 1s ease-in-out; }
   .slides-wrapper img { flex-shrink: 0; width: 90%; max-width: 250px; object-fit: cover; aspect-ratio: 3 / 4; margin: 0 auto; cursor: pointer; }
 
   .text-box { display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px; font-size: 1.2em; }
 
+  #notes { max-width: 800px; margin: 80px auto 40px auto; text-align: justify; padding: 20px; font-size: 1.3em; line-height: 1.5em; background: #fff; }
+
   .arrow { position: absolute; top: 50%; transform: translateY(-50%); font-size: 2em; color: #000; background: rgba(255,255,255,0.7); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; user-select: none; z-index: 10; opacity: 0; transition: opacity 0.3s; }
   .arrow.left { left: 10px; }
   .arrow.right { right: 10px; }
   .slideshow:hover .arrow { opacity: 1; }
 
-  #clock-container { width: 100%; display: flex; justify-content: center; padding: 30px 0; background: #fff; }
+  #clock-container { width: 100%; display: flex; justify-content: center; padding: 30px 0; }
   #clock { width: 300px; height: 300px; image-rendering: crisp-edges; }
 
-  footer { padding-bottom: 200px; } /* extra space */
+  footer { padding-bottom: 200px; }
 
   @media (max-width: 768px) {
     section { flex-direction: column; }
@@ -43,6 +45,7 @@
     .arrow { font-size: 1.5em; width: 35px; height: 35px; }
     #clock { width: 200px; height: 200px; }
     .slides-wrapper img { width: 80%; max-width: 180px; }
+    #notes { font-size: 1.1em; padding-top: 80px; }
   }
 </style>
 </head>
@@ -55,7 +58,7 @@
 </header>
 
 <div class="marquee">
-  <span>!!tobilopp on igavene ma tahan koigelt kaks kumpa!!</span>
+  <span>!!!tobilopp jaab igaveseks, koik asjad on kaks kumpi joogiraha mulle hahahahahahahahah!!!</span>
 </div>
 
 <section>
@@ -96,23 +99,27 @@
     <div class="arrow right" onclick="nextSlide('slideshow3')">&#10095;</div>
   </div>
   <div class="text-box">
-    <p>"nikotiin ja armastus"<br>20.01.25 12:00</p>
+    <p>"nikotiin ja armastus"<br>20.01.25 12:43</p>
   </div>
 </section>
 
 <section>
   <div class="text-box">
-    <p>"ma armastan oma sopru"<br>20.07.25 18:67<br>valjamuudud</p>
+    <p>"detsembrikuu"<br>20.01.25 18:36</p>
   </div>
   <div class="slideshow" id="slideshow4">
     <div class="slides-wrapper">
       <img src="image1d.png" alt="slide1" onclick="window.open('https://www.instagram.com/markuskuljelaud/', '_blank')">
-      <img src="image1d.png" alt="slide2" onclick="window.open('https://www.instagram.com/markuskuljelaud/', '_blank')">
+      <img src="image2d.png" alt="slide2" onclick="window.open('https://www.instagram.com/markuskuljelaud/', '_blank')">
     </div>
     <div class="arrow left" onclick="prevSlide('slideshow4')">&#10094;</div>
     <div class="arrow right" onclick="nextSlide('slideshow4')">&#10095;</div>
   </div>
 </section>
+
+<div id="notes">
+  <p>tobilopp on projekt, millega olen pikka aega tahtnud tegeleda. iga ese on 1:1, handmade, fakk massproduktsioon. iga asi on 20 euki ja katte saad naost nakku, ma ei saada pakiga ega mangi kullerit lolza. thans kui oled toetamas ja ole loov edasi. - markus</p>
+</div>
 
 <footer>
   <p><br><br><br><br><br><br><br><br><br><br><br><br><br><br>o. lemb<br><br><br>ma ei tegele omnivaga saad kaest katte<br><br><br>2025</p>
@@ -164,7 +171,6 @@ class Slideshow {
     this.slideshow.addEventListener('mouseenter',()=>clearInterval(this.timer));
     this.slideshow.addEventListener('mouseleave',()=>this.start());
 
-    // touch/swipe support
     let startX = 0;
     this.slideshow.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
     this.slideshow.addEventListener('touchend', e => {
@@ -188,4 +194,3 @@ function prevSlide(id){ if(id==='slideshow1') slideshow1.prev(); if(id==='slides
 
 </body>
 </html>
-
