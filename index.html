@@ -17,7 +17,7 @@
             text-transform: lowercase;
             background: #fff;
             color: #000;
-            transition: background 0.6s ease, color 0.6s ease;
+            transition: background 1s ease, color .5s ease;
         }
 
         body.dark {
@@ -31,7 +31,7 @@
         #notes {
             background: inherit;
             color: inherit;
-            transition: background 0.6s ease, color 0.6s ease;
+            transition: background , color ; <!--siin muidu peaks olema background 0.6s ease, color o.6s ease;-->
         }
 
         header,
@@ -44,7 +44,7 @@
         }
 
         #notes {
-            max-width: 800px;
+            max-width: 700px;
             margin: 80px auto 40px auto;
             text-align: justify;
             padding: 20px;
@@ -61,8 +61,8 @@
         }
 
         #clock {
-            width: 300px;
-            height: 300px;
+            width: 250px;
+            height: 250px;
             background: transparent;
         }
 
@@ -101,7 +101,7 @@
         /* startup animation */
         body {
             opacity: 0;
-            animation: pageFade 1.2s ease forwards;
+            animation: pageFade 3s ease forwards;
         }
 
         @keyframes pageFade {
@@ -125,7 +125,7 @@
     </header>
 
     <div id="notes">
-        <p>tobil6pp on projekt, millega olen pikka aega tahtnud tegelt tegeleda. iga ese on 1:1, handmade, fakk massproduktsioon. esemega tuleb kaasa ka paar ullatust, k.a privaatne videomaterjal, kuidas eset tegin ja millest inspiratsiooni sain. iga asi on suht ok hinnaga vaike joogiraha mitte nq bershka ja insta brandid ja katte saad naost nakku, ma ei saada pakiga ega mangi kullerit. thans kui copid ja ole loov edasi. esimene drop peaks saabuma jaanuari lopuks, pange kellad valmis</br>- markus</br></br></br></br></br>ou mis kellaga toimub</br></br></p>
+        <p>tobil6pp on projekt, millega olen pikka aega tahtnud tegelt tegeleda. iga ese saab olema diy, 1:1 ja hoolega tehtud. iga esemega tuleb kaasa midagi sumboolset, mis tekitab erilise sideme sinu ja eseme vahele. koik asjad saavad olema joogiraha hinna eest. esimesed paar asja valmis jaanuari lopuks - kellad valmis panna</br></br></br></br></br></br>ou mis kellaga toimub</br></br></p>
     </div>
 
     <footer>
@@ -139,13 +139,13 @@
     </footer>
 
     <script>
-        // dark light toggle
+        // dark mode light mode swith
         const clockContainer = document.getElementById('clock-container');
         clockContainer.addEventListener('click', () => {
             document.body.classList.toggle('dark');
         });
 
-        // smooth analog clock
+        // analoog kell lsiasin vaha
         const canvas = document.getElementById('clock');
         canvas.width = canvas.clientWidth;
         canvas.height = canvas.clientWidth;
