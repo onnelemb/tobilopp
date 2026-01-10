@@ -27,12 +27,11 @@
 
         header,
         footer,
-        section,
-        .marquee,
         #clock-container,
         #notes {
             background: inherit;
             color: inherit;
+            transition: background , color ; <!--siin muidu peaks olema background 0.6s ease, color o.6s ease;-->
         }
 
         header,
@@ -44,131 +43,13 @@
             display: none;
         }
 
-        .nav-link {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            font-size: 1.1em;
-            cursor: pointer;
-            z-index: 1000;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .nav-link:hover {
-            text-decoration: underline;
-        }
-
-        .marquee {
-            padding: 0.5em;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-
-        .marquee span {
-            display: inline-block;
-            padding-left: 100%;
-            animation: marquee 20s linear infinite;
-        }
-
-        @keyframes marquee {
-            0% {
-                transform: translateX(0%);
-            }
-
-            100% {
-                transform: translateX(-100%);
-            }
-        }
-
-        section {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 50px 20px;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .slideshow,
-        .text-box {
-            flex: 1 1 250px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .slides-wrapper {
-            display: flex;
-            transition: transform 1s ease-in-out;
-        }
-
-        .slides-wrapper img {
-            flex-shrink: 0;
-            width: 90%;
-            max-width: 250px;
-            object-fit: cover;
-            aspect-ratio: 3 / 4;
-            margin: 0 auto;
-            cursor: pointer;
-        }
-
-        .text-box {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 20px;
-            font-size: 1.2em;
-            cursor: pointer;
-        }
-
-        .text-box p:hover {
-            text-decoration: underline;
-        }
-
         #notes {
-            max-width: 800px;
+            max-width: 700px;
             margin: 80px auto 40px auto;
             text-align: justify;
             padding: 20px;
             font-size: 1.3em;
             line-height: 1.5em;
-        }
-
-        .arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 2em;
-            color: inherit;
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            user-select: none;
-            z-index: 10;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        body.dark .arrow {
-            background: rgba(0, 0, 0, 0.7);
-        }
-
-        .arrow.left {
-            left: 10px;
-        }
-
-        .arrow.right {
-            right: 10px;
-        }
-
-        .slideshow:hover .arrow {
-            opacity: 1;
         }
 
         #clock-container {
@@ -180,8 +61,8 @@
         }
 
         #clock {
-            width: 300px;
-            height: 300px;
+            width: 250px;
+            height: 250px;
             background: transparent;
         }
 
@@ -205,228 +86,22 @@
             text-align: right;
         }
 
-        /* popup */
-        .popup {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.6);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 100;
-        }
-
-        .popup-content {
-            background: #fff;
-            color: #000;
-            border: 1px solid currentColor;
-            padding: 30px;
-            max-width: 400px;
-            width: 90%;
-            white-space: pre-line;
-        }
-
-        body.dark .popup-content {
-            background: #000;
-            color: #fff;
-        }
-
-        /* animations */
-        @keyframes popupIn {
-            from {
-                opacity: 0;
-                transform: scale(0.95) translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
-        }
-
-        @keyframes popupOut {
-            from {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
-
-            to {
-                opacity: 0;
-                transform: scale(0.95) translateY(10px);
-            }
-        }
-
-        /* page transitions */
-        .page {
-            display: none;
-        }
-
-        .page.active {
-            display: block;
-            animation: fadeIn 0.6s ease;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* iOS Photos App Gallery Styles */
-        .gallery-container {
-            padding: 80px 0 40px 0;y
-            min-height: 100vh;
-        }
-
-        .gallery-header {
-            padding: 0 20px 20px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .gallery-title {
-            font-size: 2em;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .gallery-count {
-            font-size: 0.9em;
-            opacity: 0.6;
-        }
-
-        .photos-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 3px;
-        }
-
-        .photo-item {
-            aspect-ratio: 1;
-            overflow: hidden;
-            cursor: pointer;
-            position: relative;
-            background: rgba(128, 128, 128, 0.1);
-        }
-
-        .photo-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.2s ease;
-        }
-
-        .photo-item:hover img {
-            transform: scale(1.05);
-        }
-
-        /* Fullscreen photo viewer */
-        .photo-viewer {
-            position: fixed;
-            inset: 0;
-            background: #000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .photo-viewer.active {
-            display: flex;
-        }
-
-        .photo-viewer img {
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
-        }
-
-        .photo-viewer-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 2em;
-            color: #fff;
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-        }
-
-        .photo-viewer-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 2em;
-            color: #fff;
-            cursor: pointer;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-        }
-
-        .photo-viewer-nav.prev {
-            left: 20px;
-        }
-
-        .photo-viewer-nav.next {
-            right: 20px;
-        }
-
         @media (max-width: 768px) {
-            section {
-                flex-direction: column;
-            }
-
-            .slideshow,
-            .text-box {
-                flex: 1 1 100%;
-            }
-
             #clock {
                 width: 200px;
                 height: 200px;
-            }
-
-            .slides-wrapper img {
-                width: 80%;
-                max-width: 180px;
             }
 
             #notes {
                 font-size: 1.1em;
                 padding-top: 80px;
             }
-
-            .photos-grid {
-                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-                gap: 2px;
-            }
-
-            .gallery-title {
-                font-size: 1.8em;
-            }
         }
 
         /* startup animation */
         body {
             opacity: 0;
-            animation: pageFade 1.2s ease forwards;
+            animation: pageFade 3s ease forwards;
         }
 
         @keyframes pageFade {
@@ -443,255 +118,34 @@
 
 <body>
 
-    <!-- HOME PAGE -->
-    <div id="home-page" class="page active">
-        <a href="#gallery" class="nav-link" onclick="navigateTo('gallery')">gallery</a>
-
-        <header>
-            <div id="clock-container">
-                <canvas id="clock"></canvas>
-            </div>
-        </header>
-
-        <div class="marquee">
-            <span>!!!tobilopp jaab igaveseks, koik asjad on tupsu- ja joogiraha mulle hahahaha ulimona hahahahah aitah koik toetajad ja olge tublid ma armastan teid!!!</span>
+    <header>
+        <div id="clock-container">
+            <canvas id="clock"></canvas>
         </div>
+    </header>
 
-        <section>
-            <div class="slideshow" id="slideshow1">
-                <div class="slides-wrapper">
-                    <img src="product1_1.png" alt="slide1" onclick="window.open('https://www.instagram.com/tobil6pp/', '_blank')">
-                    <img src="product1_2.png" alt="slide2" onclick="window.open('https://www.instagram.com/tobil6pp/', '_blank')">
-                </div>
-                <div class="arrow left" onclick="prevSlide('slideshow1')">&#10094;</div>
-                <div class="arrow right" onclick="nextSlide('slideshow1')">&#10095;</div>
-            </div>
-            <div class="text-box" onclick="openPopup('ilusad turukud')">
-                <p>"ilusad turukud"<br>19.12.25 00:59</p>
-            </div>
-        </section>
-
-        <section>
-            <div class="text-box" onclick="openPopup('kai perse maison margiela')">
-                <p>"kai perse maison margiela"<br>19.12.25 17:09</p>
-            </div>
-            <div class="slideshow" id="slideshow2">
-                <div class="slides-wrapper">
-                    <img src="product2_1.png" alt="slide1" onclick="window.open('https://www.instagram.com/tobil6pp/', '_blank')">
-                    <img src="product2_2.png" alt="slide2" onclick="window.open('https://www.instagram.com/tobil6pp/', '_blank')">
-                    <img src="product2_3.png" alt="slide3" onclick="window.open('https://www.instagram.com/tobil6pp/', '_blank')">
-                </div>
-                <div class="arrow left" onclick="prevSlide('slideshow2')">&#10094;</div>
-                <div class="arrow right" onclick="nextSlide('slideshow2')">&#10095;</div>
-            </div>
-        </section>
-
-        <section>
-            <div class="slideshow" id="slideshow3">
-                <div class="slides-wrapper">
-                    <img src="image1c.png" alt="slide1" onclick="window.open('https://www.instagram.com/tobil6pp/', '_blank')">
-                    <img src="image2c.png" alt="slide2" onclick="window.open('https://www.instagram.com/tobil6pp/', '_blank')">
-                </div>
-                <div class="arrow left" onclick="prevSlide('slideshow3')">&#10094;</div>
-                <div class="arrow right" onclick="nextSlide('slideshow3')">&#10095;</div>
-            </div>
-            <div class="text-box" onclick="openPopup('nikotiin ja armastus')">
-                <p>"nikotiin ja armastus"<br>20.01.25 12:43</p>
-            </div>
-        </section>
-
-        <section>
-            <div class="text-box" onclick="openPopup('marleen kadak')">
-                <p>"marleen kadak"<br>20.01.25 18:36</p>
-            </div>
-            <div class="slideshow" id="slideshow4">
-                <div class="slides-wrapper">
-                    <img src="image1d.png" alt="slide1" onclick="window.open('https://www.instagram.com/tobil6pp/', '_blank')">
-                    <img src="image2d.png" alt="slide2" onclick="window.open('https://www.instagram.com/tobil6pp/', '_blank')">
-                </div>
-                <div class="arrow left" onclick="prevSlide('slideshow4')">&#10094;</div>
-                <div class="arrow right" onclick="nextSlide('slideshow4')">&#10095;</div>
-            </div>
-        </section>
-
-        <div id="notes">
-            <p>tobilopp on projekt, millega olen pikka aega tahtnud tegelt tegeleda. iga ese on 1:1, handmade, fakk massproduktsioon. esemega tuleb kaasa ka paar ullatust, k.a privaatne videomaterjal, kuidas eset tegin ja millest inspiratsiooni sain. iga asi on suht ok hinnaga mitte nq bershka ja insta brandid ja katte saad naost nakku, ma ei saada pakiga ega mangi kullerit. thans kui copid ja ole loov edasi.</br>- markus</br></br></br></br></br></br></br></p>
-        </div>
-
-        <footer>
-            <div class="footer-inner">
-                <div class="footer-left">
-                    o. lemb / g. s. heron<br>
-                    ma ei tegele omnivaga saad kaest katte, muu inf insta dmist
-                </div>
-                <div class="footer-right">2025</div>
-            </div>
-        </footer>
+    <div id="notes">
+        <p>tobil6pp on projekt, millega olen pikka aega tahtnud tegelt tegeleda. iga ese saab olema diy, 1:1 ja hoolega tehtud. iga esemega tuleb kaasa midagi sumboolset, mis tekitab erilise sideme sinu ja eseme vahele. koik asjad saavad olema joogiraha hinna eest. esimesed paar asja valmis jaanuari lopuks - kellad valmis panna</br></br></br></br></br></br>ou mis kellaga toimub</br></br></p>
     </div>
 
-    <!-- GALLERY PAGE - iOS Photos Style -->
-    <div id="gallery-page" class="page">
-        <a href="#home" class="nav-link" onclick="navigateTo('home')">back</a>
-
-        <div class="gallery-container">
-            <div class="gallery-header">
-                <div class="gallery-title">all photos</div>
-                <div class="gallery-count" id="photo-count">0 photos</div>
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-left">
+                o. lemb / g. s. heron<br>
+                ma ei tegele omnivaga saad kaest katte, muu inf insta dmist
             </div>
-
-            <div class="photos-grid" id="photos-grid">
-                <!-- Photos will be inserted here via JavaScript -->
-            </div>
+            <div class="footer-right">2025</div>
         </div>
-
-        <footer>
-            <div class="footer-inner">
-                <div class="footer-left">
-                    o. lemb / g. s. heron<br>
-                    ma ei tegele omnivaga saad kaest katte, muu inf insta dmist
-                </div>
-                <div class="footer-right">2025</div>
-            </div>
-        </footer>
-    </div>
-
-    <!-- Photo Viewer -->
-    <div class="photo-viewer" id="photo-viewer">
-        <div class="photo-viewer-close" onclick="closePhotoViewer()">×</div>
-        <div class="photo-viewer-nav prev" onclick="prevPhoto()">‹</div>
-        <div class="photo-viewer-nav next" onclick="nextPhoto()">›</div>
-        <img id="viewer-image" src="" alt="">
-    </div>
-
-    <div class="popup" id="popup" onclick="closePopup()">
-        <div class="popup-content" onclick="event.stopPropagation()">
-            <div id="popup-text"></div>
-        </div>
-    </div>
+    </footer>
 
     <script>
-        // GALLERY PHOTO LIST - ADD YOUR PHOTOS HERE!
-        const galleryPhotos = [
-            'gallery1.png',
-            'gallery2.png',
-            'gallery3.png',
-            'gallery4.png',
-            'gallery5.png',
-            'gallery6.png',
-            'gallery7.png',
-            'gallery8.png',
-            // Add more photos here...
-            // 'your-photo-1.jpg',
-            // 'your-photo-2.jpg',
-            // etc...
-        ];
-
-        // Initialize gallery
-        let currentPhotoIndex = 0;
-
-        function initGallery() {
-            const grid = document.getElementById('photos-grid');
-            const count = document.getElementById('photo-count');
-            
-            grid.innerHTML = '';
-            galleryPhotos.forEach((photo, index) => {
-                const item = document.createElement('div');
-                item.className = 'photo-item';
-                item.onclick = () => openPhotoViewer(index);
-                
-                const img = document.createElement('img');
-                img.src = photo;
-                img.alt = `photo ${index + 1}`;
-                
-                item.appendChild(img);
-                grid.appendChild(item);
-            });
-            
-            count.textContent = `${galleryPhotos.length} photo${galleryPhotos.length !== 1 ? 's' : ''}`;
-        }
-
-        function openPhotoViewer(index) {
-            currentPhotoIndex = index;
-            const viewer = document.getElementById('photo-viewer');
-            const img = document.getElementById('viewer-image');
-            img.src = galleryPhotos[index];
-            viewer.classList.add('active');
-        }
-
-        function closePhotoViewer() {
-            document.getElementById('photo-viewer').classList.remove('active');
-        }
-
-        function nextPhoto() {
-            currentPhotoIndex = (currentPhotoIndex + 1) % galleryPhotos.length;
-            document.getElementById('viewer-image').src = galleryPhotos[currentPhotoIndex];
-        }
-
-        function prevPhoto() {
-            currentPhotoIndex = (currentPhotoIndex - 1 + galleryPhotos.length) % galleryPhotos.length;
-            document.getElementById('viewer-image').src = galleryPhotos[currentPhotoIndex];
-        }
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            const viewer = document.getElementById('photo-viewer');
-            if (viewer.classList.contains('active')) {
-                if (e.key === 'Escape') closePhotoViewer();
-                if (e.key === 'ArrowRight') nextPhoto();
-                if (e.key === 'ArrowLeft') prevPhoto();
-            }
-        });
-
-        // page navigation
-        function navigateTo(page) {
-            event.preventDefault();
-            const pages = document.querySelectorAll('.page');
-            pages.forEach(p => p.classList.remove('active'));
-            document.getElementById(page + '-page').classList.add('active');
-            window.scrollTo(0, 0);
-            
-            // Initialize gallery when navigating to it
-            if (page === 'gallery') {
-                initGallery();
-            }
-        }
-
-        // dark light toggle
+        // dark mode light mode swith
         const clockContainer = document.getElementById('clock-container');
         clockContainer.addEventListener('click', () => {
             document.body.classList.toggle('dark');
         });
 
-        // popup logic
-        function openPopup(name) {
-            const descs = {
-                "ilusad turukud": "mulle meeldivad turukud, kes on ilusad aga ka mingisuguse hinge ja vaimuga. \n\n15.-",
-                "kai perse maison margiela": "niumeta uks toode maison margielalt mis on viisteist euki. vot\n\n15.-",
-                "nikotiin ja armastus": "mul on armastus nikotiini vastu, see on see mis ma selle rahaga teen kui sa praegu selle ostad haha\n\n15.-",
-                "marleen kadak": "ma sain teeverilt puid alla, et ma kirjutan markus nq marleen. ma arvasin, et see oli naljakas ja marleen on suht ilus nimi. #transmina\n\n15.-"
-            };
-
-            const text = descs[name] || "mingi error\n\n15.-";
-            document.getElementById('popup-text').innerText = name + "\n\n" + text;
-            const popup = document.getElementById('popup');
-            const popupContent = popup.querySelector('.popup-content');
-            popupContent.style.animation = 'popupIn 0.45s cubic-bezier(.2,.8,.2,1) forwards';
-            popup.style.display = 'flex';
-        }
-
-        function closePopup() {
-            const popup = document.getElementById('popup');
-            const popupContent = popup.querySelector('.popup-content');
-            popupContent.style.animation = 'popupOut 0.3s cubic-bezier(.2,.8,.2,1) forwards';
-            popupContent.addEventListener('animationend', () => {
-                popup.style.display = 'none';
-                popupContent.style.animation = '';
-            }, {
-                once: true
-            });
-        }
-
-        // smooth analog clock - FIXED VERSION
+        // analoog kell lsiasin vaha
         const canvas = document.getElementById('clock');
         canvas.width = canvas.clientWidth;
         canvas.height = canvas.clientWidth;
@@ -702,7 +156,7 @@
         function drawClock() {
             const fgColor = getComputedStyle(document.body).color;
             
-            // Clear with transparent background - THIS IS THE FIX!
+            // Clear with transparent background
             ctx.clearRect(-radius, -radius, canvas.width, canvas.height);
             
             ctx.fillStyle = fgColor;
@@ -744,73 +198,8 @@
         }
 
         requestAnimationFrame(drawClock);
-
-        // slideshows
-        class Slideshow {
-            constructor(id, interval = 6000) {
-                this.slideshow = document.getElementById(id);
-                this.wrapper = this.slideshow.querySelector('.slides-wrapper');
-                this.slides = Array.from(this.wrapper.querySelectorAll('img'));
-                this.index = 0;
-                this.total = this.slides.length;
-                this.intervalTime = interval;
-
-                this.wrapper.style.display = 'flex';
-                this.wrapper.style.width = `${this.total * 100}%`;
-                this.slides.forEach(slide => slide.style.width = `${100 / this.total}%`);
-
-                this.start();
-                this.slideshow.addEventListener('mouseenter', () => clearInterval(this.timer));
-                this.slideshow.addEventListener('mouseleave', () => this.start());
-
-                let startX = 0;
-                this.slideshow.addEventListener('touchstart', e => {
-                    startX = e.touches[0].clientX;
-                });
-                this.slideshow.addEventListener('touchend', e => {
-                    let endX = e.changedTouches[0].clientX;
-                    if (startX - endX > 50) this.next();
-                    else if (endX - startX > 50) this.prev();
-                });
-            }
-
-            showSlide(i) {
-                this.wrapper.style.transform = `translateX(-${i * (100 / this.total)}%)`;
-                this.index = i;
-            }
-
-            next() {
-                this.showSlide((this.index + 1) % this.total);
-            }
-            prev() {
-                this.showSlide((this.index - 1 + this.total) % this.total);
-            }
-            start() {
-                this.timer = setInterval(() => this.next(), this.intervalTime);
-            }
-        }
-
-        const slideshow1 = new Slideshow('slideshow1', 6000);
-        const slideshow2 = new Slideshow('slideshow2', 6000);
-        const slideshow3 = new Slideshow('slideshow3', 6000);
-        const slideshow4 = new Slideshow('slideshow4', 6000);
-
-        function nextSlide(id) {
-            if (id === 'slideshow1') slideshow1.next();
-            if (id === 'slideshow2') slideshow2.next();
-            if (id === 'slideshow3') slideshow3.next();
-            if (id === 'slideshow4') slideshow4.next();
-        }
-
-        function prevSlide(id) {
-            if (id === 'slideshow1') slideshow1.prev();
-            if (id === 'slideshow2') slideshow2.prev();
-            if (id === 'slideshow3') slideshow3.prev();
-            if (id === 'slideshow4') slideshow4.prev();
-        }
     </script>
 
 </body>
 
 </html>
-
